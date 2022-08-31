@@ -2,8 +2,48 @@
 
 {% block content %}
 
-<h1>{{temperature}}</h1>
+<div class="my-2">
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>¿Debería usar paraguas?</h1>
+          </div>
+          <div class="col">
+            <h1>¿Debería usar abrigo?</h1>
+          </div>
+        </div>
 
-<a class="btn btn-primary" href="">Buscar en mi ciudad actual</a>
+        <form action="/" method="POST">
+            <label for="city">Enter your city name to search for weather data</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="City name">
+            <button class="btn btn-primary">Search</button>
+        </form>
+        <button class="btn btn-primary" onclick="getLocation()" >Find my city</button>
+        
+        <h1>Temperature: {{temperature}}</h1>
+        <h1>Feels like: {{feels_like}}</h1>
+        <h1>Pressure: {{pressure}}</h1>
+        <h1>Humidity: {{humidity}}</h1>
+        <h1>Clouds: {{clouds}}</h1>
+        <h1>Wind Speed: {{wind_speed}}</h1>
+        <h1>Chance of rain in this hour: {{hourly_pop}}</h1>
+        <h1>Chance of rain in this day: {{daily_pop}}</h1>
+
+
+        <p id="demo"></p>
+</div>
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+function showPosition(position) {
+    window.location.href = "/find-city/" + position.coords.latitude + "/" + position.coords.longitude + "/";
+}
+</script>
 
 {% endblock %}
