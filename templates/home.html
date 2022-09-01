@@ -1,39 +1,38 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div class="container-fluid">
+  <form action="/" method="POST">
+      <label for="city"><h1>Enter your city name to search for weather data</h1></label>
+      <input type="text" class="form-control" id="city" name="city" placeholder="City name">
+      <button class="btn btn-primary">Search</button>
+  </form>
+  <button class="btn btn-primary" onclick="getLocation()" >Find my city</button>
 
-<div class="my-2">
-    <div class="container">
-        <div class="row">
-          <div class="col">
-            <h1>¿Debería usar paraguas?</h1>
-          </div>
-          <div class="col">
-            <h1>¿Debería usar abrigo?</h1>
-          </div>
-        </div>
+  {% if temperature %}
+    <div class="row">
+      <div class="col">
+        <h1>¿Debería usar paraguas?</h1>
+        <h2>{{answer1}}</h2>
+      </div>
+      <div class="col">
+        <h1>¿Debería usar abrigo?</h1>
+        <h2>{{answer2}}</h2>
+      </div>
+    </div>
 
-        <form action="/" method="POST">
-            <label for="city">Enter your city name to search for weather data</label>
-            <input type="text" class="form-control" id="city" name="city" placeholder="City name">
-            <button class="btn btn-primary">Search</button>
-        </form>
-        <button class="btn btn-primary" onclick="getLocation()" >Find my city</button>
-        
-        <h1>Temperature: {{temperature}}</h1>
-        <h1>Feels like: {{feels_like}}</h1>
-        <h1>Pressure: {{pressure}}</h1>
-        <h1>Humidity: {{humidity}}</h1>
-        <h1>Clouds: {{clouds}}</h1>
-        <h1>Wind Speed: {{wind_speed}}</h1>
-        <h1>Chance of rain in this hour: {{hourly_pop}}</h1>
-        <h1>Chance of rain in this day: {{daily_pop}}</h1>
-
-
-        <p id="demo"></p>
+    <h2>Temperature: {{temperature}}</h2>
+    <h2>Feels like: {{feels_like}}</h2>
+    <h2>Pressure: {{pressure}}</h2>
+    <h2>Humidity: {{humidity}}</h2>
+    <h2>Clouds: {{clouds}}</h2>
+    <h2>Wind Speed: {{wind_speed}}</h2>
+    <h2>Chance of rain in this hour: {{hourly_pop}}</h2>
+    <h2>Chance of rain in this day: {{daily_pop}}</h2>
+  {% endif %}
 </div>
+    
 <script>
-var x = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
