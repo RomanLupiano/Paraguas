@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container-fluid">
   <form action="/" method="POST">
-      <label for="city"><h1>Enter your city name to search for weather data</h1></label>
-      <input type="text" class="form-control" id="city" name="city" placeholder="City name">
-      <button class="btn btn-primary">Search</button>
+      <label for="city"><h1>Ingresa el nombre de tu ciudad para buscar los datos del clima</h1></label>
+      <input type="text" class="form-control" id="city" name="city" placeholder="Nombre de tu ciudad">
+      <button class="btn btn-primary mt-2">Buscar</button>
   </form>
-  <button class="btn btn-primary" onclick="getLocation()" >Find my city</button>
+  <button class="btn btn-primary my-2" onclick="getLocation()" >Buscar mi ciudad automáticamente</button>
 
   {% if temperature %}
     <div class="row">
