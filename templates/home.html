@@ -10,14 +10,18 @@
   <button class="btn btn-primary my-2" onclick="getLocation()" >Buscar mi ciudad automáticamente</button>
 
   {% if temperature %}
+  {{test}}
     <div class="row">
       <div class="col">
         <h1>¿Debería usar paraguas?</h1>
-        <h2>{{answer1}}</h2>
+        <h2>{{answer_umbrella}}</h2>
+        <h2>{{fir_hour_pop}}</h2>
+        <h2>{{sec_hour_pop}}</h2>
+        <h2>{{thi_hour_pop}}</h2>
       </div>
       <div class="col">
         <h1>¿Debería usar abrigo?</h1>
-        <h2>{{answer2}}</h2>
+        <h2>{{answer_coat}}</h2>
       </div>
     </div>
 

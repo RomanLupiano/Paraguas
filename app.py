@@ -30,24 +30,42 @@ def home():
 
 @app.route('/find-city/<lat>/<lon>/')
 def get_url_data(lat, lon):
-    data = requests.get(f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={get_api_key()}&units=metric').json()
-    temperature = data['current']['temp']
-    if temperature < 20:
-        answer1 = 'yes'
-        answer2 = 'yes'
+    data = requests.get(f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={get_api_key()}&units=metric&exclude=minutely').json()
 
+    current_temperature = data['current']['temp']
+    feels_like=data['current']['feels_like']
+
+    if current_temperature <= 20 or feels_like <= 20:
+        answer_coat = True
+    else:
+        answer_coat = False
+
+
+    hour1_pop=data['hourly'][0]['pop']
+    hour2_pop=data['hourly'][1]['pop']
+    hour3_pop=data['hourly'][2]['pop']
     
+
+
+    answer_umbrella = False
+
+
+     
     return render_template('home.html', 
-        temperature=temperature,
+        temperature=current_temperature,
         feels_like=data['current']['feels_like'],
         pressure=data['current']['pressure'],
         humidity=data['current']['humidity'],
         clouds=data['current']['clouds'],
         wind_speed=data['current']['wind_speed'],
         hourly_pop=data['hourly'][0]['pop'],
+        fir_hour_pop=data['hourly'][0]['pop'],
+        sec_hour_pop=data['hourly'][1]['pop'],
+        thi_hour_pop=data['hourly'][2]['pop'],
         daily_pop=data['daily'][0]['pop'],
-        answer1=answer1,
-        answer2=answer2)
+        answer_umbrella=answer_umbrella,
+        answer_coat=answer_coat,
+        test=data['hourly'][0]['pop'])
 
 @app.route('/about')
 def about():
